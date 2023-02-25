@@ -14,6 +14,9 @@ All test cases can be found here -->
 ```commandline 
 pip install -r requirements.txt
 ```
+```commandline 
+pip install -r requirements-dev.txt
+```
 
 ### How to run it?
 Run all tests in the Chrome browser.
@@ -21,9 +24,12 @@ Run all tests in the Chrome browser.
 python -m unittest 
 ```
 
+### Black auto-formatter 
+Black Python Code Formatter has been used in this project.
 
-
-
-
+How to run it?
+```commandline
+black {source_file_or_directory}
+```
 
 

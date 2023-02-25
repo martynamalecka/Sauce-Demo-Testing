@@ -8,16 +8,14 @@ from utilities.read_properties import ReadConfig
 
 
 class TestDropdownMenu(unittest.TestCase):
-
     base_url = ReadConfig.get_base_url()
     standard_user = ReadConfig.get_standard_user()
     valid_password = ReadConfig.get_valid_password()
 
     def setUp(self) -> None:
-
         # get the driver and open the browser
         options = Options()
-        options.add_argument('--start-maximized')
+        options.add_argument("--start-maximized")
         self.driver = webdriver.Chrome(options=options)
         self.driver.get(self.base_url)
 
@@ -29,33 +27,42 @@ class TestDropdownMenu(unittest.TestCase):
         self.login_page.user_login(self.standard_user, self.valid_password)
         self.inventory_page.click_dropdown_menu()
 
-        # TODO
+        # get assertion and screenshot (if test failed) helper
         self.assertion_helper = Helpers(self.driver)
 
     # test dropdown menu functionality
 
     def test_dropdown_menu_elements_displayed(self):
-
         # dropdown menu elements should be displayed as expected
         actual_dropdown_menu_elements = self.inventory_page.get_dropdown_menu_elements()
         actual_dropdown_menu_elements_list = []
         for element in actual_dropdown_menu_elements:
             actual_dropdown_menu_elements_list.append(element.text)
 
-        expected_dropdown_menu_elements_list = ['ALL ITEMS', 'ABOUT', 'LOGOUT', 'RESET APP STATE']
-        condition = actual_dropdown_menu_elements_list == expected_dropdown_menu_elements_list
-        screenshot_name = 'test_dropdown_menu_elements_displayed.png'
-        self.assertion_helper.assert_and_take_screenshot_if_failed(condition, screenshot_name)
+        expected_dropdown_menu_elements_list = [
+            "ALL ITEMS",
+            "ABOUT",
+            "LOGOUT",
+            "RESET APP STATE",
+        ]
+        condition = (
+            actual_dropdown_menu_elements_list == expected_dropdown_menu_elements_list
+        )
+        screenshot_name = "test_dropdown_menu_elements_displayed.png"
+        self.assertion_helper.assert_and_take_screenshot_if_failed(
+            condition, screenshot_name
+        )
 
     def test_dropdown_menu_close_button(self):
-
         # close the dropdown menu by clicking 'X' button
         self.inventory_page.click_dropdown_menu_close_button()
 
         # dropdown menu should be closed - not visible
         condition = self.inventory_page.is_dropdown_menu_visible()
-        screenshot_name = 'test_dropdown_menu_close_button.png'
-        self.assertion_helper.assert_and_take_screenshot_if_failed(not condition, screenshot_name)
+        screenshot_name = "test_dropdown_menu_close_button.png"
+        self.assertion_helper.assert_and_take_screenshot_if_failed(
+            not condition, screenshot_name
+        )
 
     def tearDown(self) -> None:
         self.driver.quit()

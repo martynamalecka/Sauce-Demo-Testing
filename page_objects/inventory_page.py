@@ -4,20 +4,21 @@ from selenium.webdriver.support import expected_conditions as ec
 
 
 class InventoryPage:
-
     # inventory page objects by ID
 
-    btn_dropdown_menu_id = 'react-burger-menu-btn'
-    btn_logout_id = 'logout_sidebar_link'
-    lnk_about_id = 'about_sidebar_link'
-    btn_add_to_cart_id = 'add-to-cart-sauce-labs-backpack'
-    lnk_shopping_cart_id = 'shopping_cart_container'
-    btn_dropdown_menu_close_id = 'react-burger-cross-btn'
+    btn_dropdown_menu_id = "react-burger-menu-btn"
+    btn_logout_id = "logout_sidebar_link"
+    lnk_about_id = "about_sidebar_link"
+    btn_add_to_cart_id = "add-to-cart-sauce-labs-backpack"
+    lnk_shopping_cart_id = "shopping_cart_container"
+    btn_dropdown_menu_close_id = "react-burger-cross-btn"
 
     # inventory page objects by XPATH
 
     txt_header_xpath = '//*[@id="header_container"]/div[2]/span'
-    lnk_dropdown_menu_elements_xpath = '//*[@id="menu_button_container"]/div/div[2]/div[1]/nav/a'
+    lnk_dropdown_menu_elements_xpath = (
+        '//*[@id="menu_button_container"]/div/div[2]/div[1]/nav/a'
+    )
     lnk_twitter_xpath = '//*[@id="page_wrapper"]/footer/ul/li[1]/a'
     lnk_facebook_xpath = '//*[@id="page_wrapper"]/footer/ul/li[2]/a'
     lnk_linkedin_xpath = '//*[@id="page_wrapper"]/footer/ul/li[3]/a'
@@ -29,7 +30,8 @@ class InventoryPage:
     def click_logout(self):
         self.driver.find_element(By.ID, self.btn_dropdown_menu_id).click()
         WebDriverWait(self.driver, 10).until(
-            ec.element_to_be_clickable((By.ID, self.btn_logout_id)))
+            ec.element_to_be_clickable((By.ID, self.btn_logout_id))
+        )
         self.driver.find_element(By.ID, self.btn_logout_id).click()
 
     def get_header_text(self):
@@ -44,13 +46,16 @@ class InventoryPage:
     def click_dropdown_menu(self):
         self.driver.find_element(By.ID, self.btn_dropdown_menu_id).click()
         WebDriverWait(self.driver, 10).until(
-                ec.element_to_be_clickable((By.ID, self.lnk_about_id)))
+            ec.element_to_be_clickable((By.ID, self.lnk_about_id))
+        )
 
     def click_about(self):
         self.driver.find_element(By.ID, self.lnk_about_id).click()
 
     def get_dropdown_menu_elements(self):
-        return self.driver.find_elements(By.XPATH, self.lnk_dropdown_menu_elements_xpath)
+        return self.driver.find_elements(
+            By.XPATH, self.lnk_dropdown_menu_elements_xpath
+        )
 
     def click_dropdown_menu_close_button(self):
         self.driver.find_element(By.ID, self.btn_dropdown_menu_close_id).click()
