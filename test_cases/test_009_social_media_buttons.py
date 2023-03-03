@@ -17,6 +17,7 @@ class TestSocialMediaButtons(unittest.TestCase):
         # get the driver and open the browser
         options = Options()
         options.add_argument("--start-maximized")
+        options.add_argument("--headless")
         self.driver = webdriver.Chrome(options=options)
         self.driver.get(self.base_url)
 
