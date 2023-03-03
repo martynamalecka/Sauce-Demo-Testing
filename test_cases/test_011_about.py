@@ -1,10 +1,12 @@
-from page_objects.inventory_page import InventoryPage
-from page_objects.login_page import LoginPage
-from utilities.read_properties import ReadConfig
 import unittest
+
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+
+from page_objects.inventory_page import InventoryPage
+from page_objects.login_page import LoginPage
 from test_cases.helpers import Helpers
+from utilities.read_properties import ReadConfig
 
 
 class TestAbout(unittest.TestCase):

@@ -1,4 +1,4 @@
-from selenium.webdriver import Keys, ActionChains
+from selenium.webdriver import ActionChains, Keys
 from selenium.webdriver.common.by import By
 
 

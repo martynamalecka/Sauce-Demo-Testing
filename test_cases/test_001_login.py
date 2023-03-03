@@ -1,8 +1,10 @@
-from selenium.webdriver.chrome.options import Options
-from selenium import webdriver
-from page_objects.login_page import LoginPage
-from page_objects.inventory_page import InventoryPage
 import unittest
+
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+
+from page_objects.inventory_page import InventoryPage
+from page_objects.login_page import LoginPage
 from test_cases.helpers import Helpers
 from utilities.read_properties import ReadConfig
 
@@ -17,6 +19,7 @@ class TestLogin(unittest.TestCase):
     valid_password = ReadConfig.get_valid_password()
     invalid_password = ReadConfig.get_invalid_password()
 
+    # TODO other browsers to be added
     def setUp(self) -> None:
         # get the driver and open the browser
         options = Options()
