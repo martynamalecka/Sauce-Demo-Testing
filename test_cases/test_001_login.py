@@ -1,8 +1,10 @@
-from selenium.webdriver.chrome.options import Options
-from selenium import webdriver
-from page_objects.login_page import LoginPage
-from page_objects.inventory_page import InventoryPage
 import unittest
+
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+
+from page_objects.inventory_page import InventoryPage
+from page_objects.login_page import LoginPage
 from test_cases.helpers import Helpers
 from utilities.read_properties import ReadConfig
 
@@ -17,6 +19,7 @@ class TestLogin(unittest.TestCase):
     valid_password = ReadConfig.get_valid_password()
     invalid_password = ReadConfig.get_invalid_password()
 
+    # TODO other browsers to be added
     def setUp(self) -> None:
         # get the driver and open the browser
         options = Options()
@@ -40,7 +43,7 @@ class TestLogin(unittest.TestCase):
 
         # check if the actual header value matched the expected value
         actual_header = self.inventory_page.get_header_text()
-        expected_header = "PRODUCTS"
+        expected_header = "Products"
         condition = actual_header == expected_header
         screenshot_name = "test_standard_user_login.png"
         self.assertion_helper.assert_and_take_screenshot_if_failed(
@@ -53,7 +56,7 @@ class TestLogin(unittest.TestCase):
 
         # the actual header value should match the expected value
         actual_header = self.inventory_page.get_header_text()
-        expected_header = "PRODUCTS"
+        expected_header = "Products"
         condition = actual_header == expected_header
         screenshot_name = "test_problem_user_login.png"
         self.assertion_helper.assert_and_take_screenshot_if_failed(
@@ -66,7 +69,7 @@ class TestLogin(unittest.TestCase):
 
         # the actual header value should match the expected value
         actual_header = self.inventory_page.get_header_text()
-        expected_header = "PRODUCTS"
+        expected_header = "Products"
         condition = actual_header == expected_header
         screenshot_name = "test_performance_glitch_user_login.png"
         self.assertion_helper.assert_and_take_screenshot_if_failed(
@@ -182,7 +185,7 @@ class TestLogin(unittest.TestCase):
 
         # the actual header value should match the expected value
         actual_header = self.inventory_page.get_header_text()
-        expected_header = "PRODUCTS"
+        expected_header = "Products"
         condition = actual_header == expected_header
         screenshot_name = "test_keyboard_keys_login.png"
         self.assertion_helper.assert_and_take_screenshot_if_failed(
@@ -223,7 +226,7 @@ class TestLogin(unittest.TestCase):
 
         # the actual header value should match the expected value
         actual_header = self.inventory_page.get_header_text()
-        expected_header = "PRODUCTS"
+        expected_header = "Products"
         condition = actual_header == expected_header
         screenshot_name = "test_browser_reload.png"
         self.assertion_helper.assert_and_take_screenshot_if_failed(

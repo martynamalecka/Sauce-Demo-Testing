@@ -1,6 +1,8 @@
 import unittest
+
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+
 from page_objects.inventory_page import InventoryPage
 from page_objects.login_page import LoginPage
 from test_cases.helpers import Helpers
@@ -41,10 +43,10 @@ class TestDropdownMenu(unittest.TestCase):
             actual_dropdown_menu_elements_list.append(element.text)
 
         expected_dropdown_menu_elements_list = [
-            "ALL ITEMS",
-            "ABOUT",
-            "LOGOUT",
-            "RESET APP STATE",
+            "All Items",
+            "About",
+            "Logout",
+            "Reset App State",
         ]
         condition = (
             actual_dropdown_menu_elements_list == expected_dropdown_menu_elements_list
