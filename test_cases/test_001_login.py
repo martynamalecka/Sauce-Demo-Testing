@@ -43,7 +43,7 @@ class TestLogin(unittest.TestCase):
 
         # check if the actual header value matched the expected value
         actual_header = self.inventory_page.get_header_text()
-        expected_header = "PRODUCTS"
+        expected_header = "Products"
         condition = actual_header == expected_header
         screenshot_name = "test_standard_user_login.png"
         self.assertion_helper.assert_and_take_screenshot_if_failed(
@@ -56,7 +56,7 @@ class TestLogin(unittest.TestCase):
 
         # the actual header value should match the expected value
         actual_header = self.inventory_page.get_header_text()
-        expected_header = "PRODUCTS"
+        expected_header = "Products"
         condition = actual_header == expected_header
         screenshot_name = "test_problem_user_login.png"
         self.assertion_helper.assert_and_take_screenshot_if_failed(
@@ -69,7 +69,7 @@ class TestLogin(unittest.TestCase):
 
         # the actual header value should match the expected value
         actual_header = self.inventory_page.get_header_text()
-        expected_header = "PRODUCTS"
+        expected_header = "Products"
         condition = actual_header == expected_header
         screenshot_name = "test_performance_glitch_user_login.png"
         self.assertion_helper.assert_and_take_screenshot_if_failed(
@@ -185,7 +185,7 @@ class TestLogin(unittest.TestCase):
 
         # the actual header value should match the expected value
         actual_header = self.inventory_page.get_header_text()
-        expected_header = "PRODUCTS"
+        expected_header = "Products"
         condition = actual_header == expected_header
         screenshot_name = "test_keyboard_keys_login.png"
         self.assertion_helper.assert_and_take_screenshot_if_failed(
@@ -226,7 +226,7 @@ class TestLogin(unittest.TestCase):
 
         # the actual header value should match the expected value
         actual_header = self.inventory_page.get_header_text()
-        expected_header = "PRODUCTS"
+        expected_header = "Products"
         condition = actual_header == expected_header
         screenshot_name = "test_browser_reload.png"
         self.assertion_helper.assert_and_take_screenshot_if_failed(

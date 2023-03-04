@@ -43,10 +43,10 @@ class TestDropdownMenu(unittest.TestCase):
             actual_dropdown_menu_elements_list.append(element.text)
 
         expected_dropdown_menu_elements_list = [
-            "ALL ITEMS",
-            "ABOUT",
-            "LOGOUT",
-            "RESET APP STATE",
+            "All Items",
+            "About",
+            "Logout",
+            "Reset App State",
         ]
         condition = (
             actual_dropdown_menu_elements_list == expected_dropdown_menu_elements_list
