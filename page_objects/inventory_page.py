@@ -16,7 +16,7 @@ class InventoryPage:
     # inventory page objects by XPATH
 
     txt_header_xpath = '//*[@id="header_container"]/div[2]/span'
-    lnk_dropdown_menu_elements_xpath = (
+    lnk_dropdown_menu_container_xpath = (
         '//*[@id="menu_button_container"]/div/div[2]/div[1]/nav/a'
     )
     lnk_twitter_xpath = '//*[@id="page_wrapper"]/footer/ul/li[1]/a'
@@ -54,7 +54,7 @@ class InventoryPage:
 
     def get_dropdown_menu_elements(self):
         return self.driver.find_elements(
-            By.XPATH, self.lnk_dropdown_menu_elements_xpath
+            By.XPATH, self.lnk_dropdown_menu_container_xpath
         )
 
     def click_dropdown_menu_close_button(self):
@@ -63,7 +63,12 @@ class InventoryPage:
         WebDriverWait(self.driver, 10).until(ec.invisibility_of_element(menu))
 
     def is_dropdown_menu_visible(self):
-        return self.driver.find_element(By.ID, self.lnk_about_id).is_displayed()
+        dropdown_menu_container = self.driver.find_element(
+            By.XPATH, '//*[@id="menu_button_container"]/div/div[2]'
+        )
+        return self.driver.find_element(
+            By.XPATH, self.lnk_dropdown_menu_container_xpath
+        ).is_displayed() and not dropdown_menu_container.get_attribute("hidden")
 
     def click_twitter_button(self):
         self.driver.find_element(By.XPATH, self.lnk_twitter_xpath).click()
