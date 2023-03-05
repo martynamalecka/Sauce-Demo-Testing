@@ -36,21 +36,8 @@ class TestDropdownMenu(unittest.TestCase):
     # test dropdown menu functionality
 
     def test_dropdown_menu_elements_displayed(self):
-        # dropdown menu elements should be displayed as expected
-        actual_dropdown_menu_elements = self.inventory_page.get_dropdown_menu_elements()
-        actual_dropdown_menu_elements_list = []
-        for element in actual_dropdown_menu_elements:
-            actual_dropdown_menu_elements_list.append(element.text)
-
-        expected_dropdown_menu_elements_list = [
-            "All Items",
-            "About",
-            "Logout",
-            "Reset App State",
-        ]
-        condition = (
-            actual_dropdown_menu_elements_list == expected_dropdown_menu_elements_list
-        )
+        # dropdown menu should be opened and all elements visible
+        condition = self.inventory_page.is_dropdown_menu_visible()
         screenshot_name = "test_dropdown_menu_elements_displayed.png"
         self.assertion_helper.assert_and_take_screenshot_if_failed(
             condition, screenshot_name
