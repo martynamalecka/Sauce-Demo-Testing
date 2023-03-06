@@ -9,7 +9,7 @@ class LoginPage:
     btn_login_id = "login-button"
 
     # login page objects by XPATH
-    txt_locked_out_user_error_msg_xpath = (
+    txt_login_error_msg_xpath = (
         '//*[@id="login_button_container"]/div/form/div[3]/h3'
     )
     txt_logout_confirmation_xpath = '//*[@id="login_credentials"]/h4'
@@ -28,7 +28,7 @@ class LoginPage:
 
     def get_login_error_message(self):
         return self.driver.find_element(
-            By.XPATH, self.txt_locked_out_user_error_msg_xpath
+            By.XPATH, self.txt_login_error_msg_xpath
         ).text
 
     def click_tab(self):

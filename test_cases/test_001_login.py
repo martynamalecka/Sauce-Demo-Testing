@@ -1,16 +1,9 @@
-import unittest
-
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-
-from page_objects.inventory_page import InventoryPage
-from page_objects.login_page import LoginPage
-from test_cases.helpers import Helpers
+from test_cases.test_case_with_selenium import TestCaseWithSelenium
 from utilities.read_properties import ReadConfig
 
 
-class TestLogin(unittest.TestCase):
-    base_url = ReadConfig.get_base_url()
+class TestLogin(TestCaseWithSelenium):
+    # get login credentials
     standard_user = ReadConfig.get_standard_user()
     locked_out_user = ReadConfig.get_locked_out_user()
     problem_user = ReadConfig.get_problem_user()
@@ -20,20 +13,13 @@ class TestLogin(unittest.TestCase):
     invalid_password = ReadConfig.get_invalid_password()
 
     # TODO other browsers to be added
+
     def setUp(self) -> None:
-        # get the driver and open the browser
-        options = Options()
-        options.add_argument("--start-maximized")
-        options.add_argument("--headless")
-        self.driver = webdriver.Chrome(options=options)
-        self.driver.get(self.base_url)
+        # get the driver, open the browser and open the url
+        self.get_driver_and_open_url()
 
-        # create page objects for further testing
-        self.login_page = LoginPage(self.driver)
-        self.inventory_page = InventoryPage(self.driver)
-
-        # get assertion and screenshot (if test failed) helper
-        self.assertion_helper = Helpers(self.driver)
+        # get page objects for further testing
+        self.get_page_objects()
 
     # test login functionality
 
@@ -46,7 +32,7 @@ class TestLogin(unittest.TestCase):
         expected_header = "Products"
         condition = actual_header == expected_header
         screenshot_name = "test_standard_user_login.png"
-        self.assertion_helper.assert_and_take_screenshot_if_failed(
+        self.assert_and_take_screenshot_if_failed(
             condition, screenshot_name
         )
 
@@ -59,7 +45,7 @@ class TestLogin(unittest.TestCase):
         expected_header = "Products"
         condition = actual_header == expected_header
         screenshot_name = "test_problem_user_login.png"
-        self.assertion_helper.assert_and_take_screenshot_if_failed(
+        self.assert_and_take_screenshot_if_failed(
             condition, screenshot_name
         )
 
@@ -72,7 +58,7 @@ class TestLogin(unittest.TestCase):
         expected_header = "Products"
         condition = actual_header == expected_header
         screenshot_name = "test_performance_glitch_user_login.png"
-        self.assertion_helper.assert_and_take_screenshot_if_failed(
+        self.assert_and_take_screenshot_if_failed(
             condition, screenshot_name
         )
 
@@ -85,7 +71,7 @@ class TestLogin(unittest.TestCase):
         expected_header = "Epic sadface: Sorry, this user has been locked out."
         condition = actual_header == expected_header
         screenshot_name = "test_locked_out_user_login.png"
-        self.assertion_helper.assert_and_take_screenshot_if_failed(
+        self.assert_and_take_screenshot_if_failed(
             condition, screenshot_name
         )
 
@@ -100,7 +86,7 @@ class TestLogin(unittest.TestCase):
         )
         condition = actual_header == expected_header
         screenshot_name = "test_invalid_username_login.png"
-        self.assertion_helper.assert_and_take_screenshot_if_failed(
+        self.assert_and_take_screenshot_if_failed(
             condition, screenshot_name
         )
 
@@ -115,7 +101,7 @@ class TestLogin(unittest.TestCase):
         )
         condition = actual_header == expected_header
         screenshot_name = "test_invalid_password_login.png"
-        self.assertion_helper.assert_and_take_screenshot_if_failed(
+        self.assert_and_take_screenshot_if_failed(
             condition, screenshot_name
         )
 
@@ -130,7 +116,7 @@ class TestLogin(unittest.TestCase):
         )
         condition = actual_header == expected_header
         screenshot_name = "test_invalid_credentials_login.png"
-        self.assertion_helper.assert_and_take_screenshot_if_failed(
+        self.assert_and_take_screenshot_if_failed(
             condition, screenshot_name
         )
 
@@ -143,7 +129,7 @@ class TestLogin(unittest.TestCase):
         expected_header = "Epic sadface: Username is required"
         condition = actual_header == expected_header
         screenshot_name = "test_no_credentials_login.png"
-        self.assertion_helper.assert_and_take_screenshot_if_failed(
+        self.assert_and_take_screenshot_if_failed(
             condition, screenshot_name
         )
 
@@ -157,7 +143,7 @@ class TestLogin(unittest.TestCase):
         expected_header = "Epic sadface: Username is required"
         condition = actual_header == expected_header
         screenshot_name = "test_no_username_login.png"
-        self.assertion_helper.assert_and_take_screenshot_if_failed(
+        self.assert_and_take_screenshot_if_failed(
             condition, screenshot_name
         )
 
@@ -171,7 +157,7 @@ class TestLogin(unittest.TestCase):
         expected_header = "Epic sadface: Password is required"
         condition = actual_header == expected_header
         screenshot_name = "test_no_password_login.png"
-        self.assertion_helper.assert_and_take_screenshot_if_failed(
+        self.assert_and_take_screenshot_if_failed(
             condition, screenshot_name
         )
 
@@ -188,7 +174,7 @@ class TestLogin(unittest.TestCase):
         expected_header = "Products"
         condition = actual_header == expected_header
         screenshot_name = "test_keyboard_keys_login.png"
-        self.assertion_helper.assert_and_take_screenshot_if_failed(
+        self.assert_and_take_screenshot_if_failed(
             condition, screenshot_name
         )
 
@@ -201,7 +187,7 @@ class TestLogin(unittest.TestCase):
         expected_element_type = "password"
         condition = actual_element_type == expected_element_type
         screenshot_name = "test_password_visibility.png"
-        self.assertion_helper.assert_and_take_screenshot_if_failed(
+        self.assert_and_take_screenshot_if_failed(
             condition, screenshot_name
         )
 
@@ -215,7 +201,7 @@ class TestLogin(unittest.TestCase):
         expected_data = ""
         condition = actual_data == expected_data
         screenshot_name = "test_password_copying_disabled.png"
-        self.assertion_helper.assert_and_take_screenshot_if_failed(
+        self.assert_and_take_screenshot_if_failed(
             condition, screenshot_name
         )
 
@@ -229,7 +215,7 @@ class TestLogin(unittest.TestCase):
         expected_header = "Products"
         condition = actual_header == expected_header
         screenshot_name = "test_browser_reload.png"
-        self.assertion_helper.assert_and_take_screenshot_if_failed(
+        self.assert_and_take_screenshot_if_failed(
             condition, screenshot_name
         )
 

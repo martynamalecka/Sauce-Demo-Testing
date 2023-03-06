@@ -1,37 +1,24 @@
-import unittest
-
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-
-from page_objects.inventory_page import InventoryPage
-from page_objects.login_page import LoginPage
-from test_cases.helpers import Helpers
+from test_cases.test_case_with_selenium import TestCaseWithSelenium
 from utilities.read_properties import ReadConfig
 
 
-class TestLogout(unittest.TestCase):
-    base_url = ReadConfig.get_base_url()
+class TestLogout(TestCaseWithSelenium):
+    # get login credentials
     standard_user = ReadConfig.get_standard_user()
     valid_password = ReadConfig.get_valid_password()
 
     def setUp(self) -> None:
-        # get the driver and open the browser
-        options = Options()
-        options.add_argument("--start-maximized")
-        options.add_argument("--headless")
-        self.driver = webdriver.Chrome(options=options)
-        self.driver.get(self.base_url)
+        # get the driver, open the browser and open the url
+        self.get_driver_and_open_url()
 
-        # create page objects for further testing
-        self.login_page = LoginPage(self.driver)
-        self.inventory_page = InventoryPage(self.driver)
+        # get page objects for further testing
+        self.get_page_objects()
 
-        # perform a successful login and click logout
+        # perform a successful login
         self.login_page.user_login(self.standard_user, self.valid_password)
-        self.inventory_page.click_logout()
 
-        # get assertion and screenshot (if test failed) helper
-        self.assertion_helper = Helpers(self.driver)
+        # log out
+        self.inventory_page.click_logout()
 
     # test logout functionality
 
@@ -41,7 +28,7 @@ class TestLogout(unittest.TestCase):
         expected_logout_confirmation = "Accepted usernames are:"
         condition = actual_logout_confirmation == expected_logout_confirmation
         screenshot_name = "test_logout.png"
-        self.assertion_helper.assert_and_take_screenshot_if_failed(
+        self.assert_and_take_screenshot_if_failed(
             condition, screenshot_name
         )
 
@@ -54,7 +41,7 @@ class TestLogout(unittest.TestCase):
         expected_logout_confirmation = "Epic sadface: You can only access '/inventory.html' when you are logged in."
         condition = actual_logout_confirmation == expected_logout_confirmation
         screenshot_name = "test_browse_back_logout.png"
-        self.assertion_helper.assert_and_take_screenshot_if_failed(
+        self.assert_and_take_screenshot_if_failed(
             condition, screenshot_name
         )
 
