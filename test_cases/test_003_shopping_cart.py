@@ -1,5 +1,4 @@
 from test_cases.test_case_with_selenium import TestCaseWithSelenium
-from utilities.read_properties import ReadConfig
 
 
 class TestAddToCart(TestCaseWithSelenium):
@@ -17,9 +16,9 @@ class TestAddToCart(TestCaseWithSelenium):
         self.inventory_page.click_shopping_cart()
 
         # the item should be displayed in the cart
-        condition = self.shopping_cart_page.is_any_item_displayed()
-        screenshot_name = "test_add_to_cart.png"
-        self.assert_and_take_screenshot_if_failed(condition, screenshot_name)
+        self.assert_and_take_screenshot_if_failed(
+            self.shopping_cart_page.is_any_item_displayed(), "test_add_to_cart.png"
+        )
 
     def tearDown(self) -> None:
         self.driver.quit()
