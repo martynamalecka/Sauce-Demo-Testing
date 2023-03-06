@@ -3,19 +3,11 @@ from utilities.read_properties import ReadConfig
 
 
 class TestAddToCart(TestCaseWithSelenium):
-    # get login credentials
-    standard_user = ReadConfig.get_standard_user()
-    valid_password = ReadConfig.get_valid_password()
-
     def setUp(self) -> None:
-        # get the driver, open the browser and open the url
-        self.get_driver_and_open_url()
-
-        # get page objects for further testing
-        self.get_page_objects()
+        super().setUp()
 
         # perform a successful login
-        self.login_page.user_login(self.standard_user, self.valid_password)
+        self.login_page.login_with_standard_username_and_password()
 
     # test shopping cart functionality
 
@@ -27,9 +19,7 @@ class TestAddToCart(TestCaseWithSelenium):
         # the item should be displayed in the cart
         condition = self.shopping_cart_page.is_any_item_displayed()
         screenshot_name = "test_add_to_cart.png"
-        self.assert_and_take_screenshot_if_failed(
-            condition, screenshot_name
-        )
+        self.assert_and_take_screenshot_if_failed(condition, screenshot_name)
 
     def tearDown(self) -> None:
         self.driver.quit()

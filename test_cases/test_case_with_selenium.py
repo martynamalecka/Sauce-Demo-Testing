@@ -11,7 +11,6 @@ from utilities.read_properties import ReadConfig
 
 
 class TestCaseWithSelenium(unittest.TestCase):
-
     def get_driver_and_open_url(self):
         base_url = ReadConfig.get_base_url()
         options = Options()
@@ -25,6 +24,13 @@ class TestCaseWithSelenium(unittest.TestCase):
         self.login_page = LoginPage(self.driver)
         self.inventory_page = InventoryPage(self.driver)
         self.shopping_cart_page = ShoppingCartPage(self.driver)
+
+    def setUp(self) -> None:
+        # get the driver, open the browser and open the url
+        self.get_driver_and_open_url()
+
+        # get page objects for further testing
+        self.get_page_objects()
 
     def assert_and_take_screenshot_if_failed(self, condition, screenshot_name):
         if not condition:
