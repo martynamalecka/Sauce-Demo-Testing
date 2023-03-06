@@ -3,19 +3,11 @@ from utilities.read_properties import ReadConfig
 
 
 class TestSocialMediaButtons(TestCaseWithSelenium):
-    # get login credentials
-    standard_user = ReadConfig.get_standard_user()
-    valid_password = ReadConfig.get_valid_password()
-
     def setUp(self) -> None:
-        # get the driver, open the browser and open the url
-        self.get_driver_and_open_url()
-
-        # get page objects for further testing
-        self.get_page_objects()
+        super().setUp()
 
         # perform a successful login
-        self.login_page.user_login(self.standard_user, self.valid_password)
+        self.login_page.login_with_standard_username_and_password()
 
     # test social media buttons functionality
 
@@ -28,9 +20,7 @@ class TestSocialMediaButtons(TestCaseWithSelenium):
         expected_title = "Swag Labs"
         condition = actual_title == expected_title
         screenshot_name = "test_twitter_button.png"
-        self.assert_and_take_screenshot_if_failed(
-            condition, screenshot_name
-        )
+        self.assert_and_take_screenshot_if_failed(condition, screenshot_name)
 
     def test_facebook_button(self):
         # click the Facebook button and get the actual website title
@@ -41,9 +31,7 @@ class TestSocialMediaButtons(TestCaseWithSelenium):
         expected_title = "Swag Labs"
         condition = actual_title == expected_title
         screenshot_name = "test_facebook_button.png"
-        self.assert_and_take_screenshot_if_failed(
-            condition, screenshot_name
-        )
+        self.assert_and_take_screenshot_if_failed(condition, screenshot_name)
 
     def test_linkedin_button(self):
         # click the LinkedIn button and get the actual website title
@@ -54,9 +42,7 @@ class TestSocialMediaButtons(TestCaseWithSelenium):
         expected_title = "Swag Labs"
         condition = actual_title == expected_title
         screenshot_name = "test_linkedin_button.png"
-        self.assert_and_take_screenshot_if_failed(
-            condition, screenshot_name
-        )
+        self.assert_and_take_screenshot_if_failed(condition, screenshot_name)
 
     def tearDown(self) -> None:
         self.driver.quit()

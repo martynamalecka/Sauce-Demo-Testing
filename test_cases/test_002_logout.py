@@ -8,14 +8,10 @@ class TestLogout(TestCaseWithSelenium):
     valid_password = ReadConfig.get_valid_password()
 
     def setUp(self) -> None:
-        # get the driver, open the browser and open the url
-        self.get_driver_and_open_url()
-
-        # get page objects for further testing
-        self.get_page_objects()
+        super().setUp()
 
         # perform a successful login
-        self.login_page.user_login(self.standard_user, self.valid_password)
+        self.login_page.login_with_standard_username_and_password()
 
         # log out
         self.inventory_page.click_logout()
@@ -24,13 +20,11 @@ class TestLogout(TestCaseWithSelenium):
 
     def test_logout(self):
         # the actual header value should match the expected value
-        actual_logout_confirmation = self.login_page.get_logout_confirmation()
+        actual_logout_confirmation = self.login_page.get_logout_confirmation_text()
         expected_logout_confirmation = "Accepted usernames are:"
         condition = actual_logout_confirmation == expected_logout_confirmation
         screenshot_name = "test_logout.png"
-        self.assert_and_take_screenshot_if_failed(
-            condition, screenshot_name
-        )
+        self.assert_and_take_screenshot_if_failed(condition, screenshot_name)
 
     def test_browse_back_logout(self):
         # browse back, user should be logged out
@@ -41,9 +35,7 @@ class TestLogout(TestCaseWithSelenium):
         expected_logout_confirmation = "Epic sadface: You can only access '/inventory.html' when you are logged in."
         condition = actual_logout_confirmation == expected_logout_confirmation
         screenshot_name = "test_browse_back_logout.png"
-        self.assert_and_take_screenshot_if_failed(
-            condition, screenshot_name
-        )
+        self.assert_and_take_screenshot_if_failed(condition, screenshot_name)
 
     def tearDown(self) -> None:
         self.driver.quit()

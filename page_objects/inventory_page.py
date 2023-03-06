@@ -52,17 +52,12 @@ class InventoryPage:
     def click_about(self):
         self.driver.find_element(By.ID, self.lnk_about_id).click()
 
-    def get_dropdown_menu_elements(self):
-        return self.driver.find_elements(
-            By.XPATH, self.lnk_dropdown_menu_container_xpath
-        )
-
     def click_dropdown_menu_close_button(self):
         self.driver.find_element(By.ID, self.btn_dropdown_menu_close_id).click()
         menu = self.driver.find_element(By.ID, self.lnk_about_id)
         WebDriverWait(self.driver, 10).until(ec.invisibility_of_element(menu))
 
-    def is_dropdown_menu_visible(self):
+    def check_if_dropdown_menu_visible(self):
         dropdown_menu_container = self.driver.find_element(
             By.XPATH, '//*[@id="menu_button_container"]/div/div[2]'
         )
