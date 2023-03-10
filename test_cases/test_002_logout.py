@@ -30,6 +30,3 @@ class TestLogout(TestCaseWithSelenium):
             == "Epic sadface: You can only access '/inventory.html' when you are logged in.",
             "test_browse_back_logout.png",
         )
-
-    def tearDown(self) -> None:
-        self.driver.quit()

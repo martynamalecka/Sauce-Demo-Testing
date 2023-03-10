@@ -2,7 +2,9 @@ import os
 import unittest
 
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.options import Options as ChromeOptions
+from selenium.webdriver.edge.options import Options as EdgeOptions
+from selenium.webdriver.firefox.options import Options as FirefoxOptions
 
 from page_objects.inventory_page import InventoryPage
 from page_objects.login_page import LoginPage
@@ -11,12 +13,39 @@ from utilities.read_properties import ReadConfig
 
 
 class TestCaseWithSelenium(unittest.TestCase):
+    # set default browser
+    DEFAULT_BROWSER = "chrome"
+
     def get_driver_and_open_url(self):
+        # get base URL
         base_url = ReadConfig.get_base_url()
-        options = Options()
-        options.add_argument("--start-maximized")
-        options.add_argument("--headless")
-        self.driver = webdriver.Chrome(options=options)
+
+        # set browser options - Chrome
+        chrome_options = ChromeOptions()
+        chrome_options.add_argument("--headless")
+        chrome_options.add_argument("--start-maximized")
+
+        # set browser options - Firefox
+        firefox_options = FirefoxOptions()
+        firefox_options.add_argument("--headless")
+        firefox_options.add_argument("--start-maximized")
+
+        # set browser options - Edge
+        edge_options = EdgeOptions()
+        edge_options.add_argument("--headless")
+        edge_options.add_argument("--start-maximized")
+
+        # get the environment variable - BROWSER
+        browser = os.environ.get("BROWSER", self.DEFAULT_BROWSER)
+
+        # open the browser
+        if browser == "edge":
+            self.driver = webdriver.Edge(options=edge_options)
+        elif browser == "firefox":
+            self.driver = webdriver.Firefox(options=firefox_options)
+        else:
+            self.driver = webdriver.Chrome(options=chrome_options)
+
         self.driver.get(base_url)
         return self.driver
 
@@ -40,3 +69,6 @@ class TestCaseWithSelenium(unittest.TestCase):
             )
             assert False
         assert True
+
+    def tearDown(self) -> None:
+        self.driver.quit()
