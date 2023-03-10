@@ -36,6 +36,3 @@ class TestSocialMediaButtons(TestCaseWithSelenium):
         self.assert_and_take_screenshot_if_failed(
             self.driver.title == "Swag Labs", "test_linkedin_button.png"
         )
-
-    def tearDown(self) -> None:
-        self.driver.quit()

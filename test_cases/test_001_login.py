@@ -167,6 +167,3 @@ class TestLogin(TestCaseWithSelenium):
             self.inventory_page.get_header_text() == "Products",
             "test_browser_reload.png",
         )
-
-    def tearDown(self) -> None:
-        self.driver.quit()

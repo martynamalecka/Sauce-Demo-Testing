@@ -19,6 +19,3 @@ class TestAbout(TestCaseWithSelenium):
             == "Sauce Labs: Cross Browser Testing, Selenium Testing & Mobile Testing",
             "test_about.png",
         )
-
-    def tearDown(self) -> None:
-        self.driver.quit()

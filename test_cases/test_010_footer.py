@@ -14,6 +14,3 @@ class TestFooter(TestCaseWithSelenium):
             == "© 2023 Sauce Labs. All Rights Reserved. Terms of Service | Privacy Policy",
             "test_footer_content.png",
         )
-
-    def tearDown(self) -> None:
-        self.driver.quit()

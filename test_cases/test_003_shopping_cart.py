@@ -19,6 +19,3 @@ class TestAddToCart(TestCaseWithSelenium):
         self.assert_and_take_screenshot_if_failed(
             self.shopping_cart_page.is_any_item_displayed(), "test_add_to_cart.png"
         )
-
-    def tearDown(self) -> None:
-        self.driver.quit()

@@ -19,17 +19,35 @@ pip install -r requirements-dev.txt
 ```
 
 ### How to run it?
-Run all tests in the Chrome browser.
+Run all tests in the default Chrome browser.
 ```commandline
 python -m unittest 
 ```
+To run all tests in the Edge or Firefox browser, first set the environment variable.
+```commandline
+export BROWSER="chrome"
+```
+Run tests in the Firefox browser.
+```commandline
+BROWSER=firefox python -m unittest 
+```
+Run tests in the Edge browser.
+```commandline
+BROWSER=edge python -m unittest 
+```
 
-### Black auto-formatter 
-Black Python Code Formatter has been used in this project.
+### Black 
+Black Python code auto-formatter has been used in this project.
 
 How to run it?
 ```commandline
 black {source_file_or_directory}
 ```
 
+### Isort 
+Isort formatter has been used in this project to sort imports alphabetically, and automatically separate them into sections and by type.
 
+How to run it?
+```commandline
+isort {source_file_or_directory}
+```

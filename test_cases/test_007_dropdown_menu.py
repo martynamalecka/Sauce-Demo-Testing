@@ -29,6 +29,3 @@ class TestDropdownMenu(TestCaseWithSelenium):
             not self.inventory_page.check_if_dropdown_menu_visible(),
             "test_dropdown_menu_close_button.png",
         )
-
-    def tearDown(self) -> None:
-        self.driver.quit()
