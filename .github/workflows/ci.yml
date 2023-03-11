@@ -34,7 +34,8 @@ jobs:
   test firefox:
     runs-on: ubuntu-latest
     steps:
-      - uses: browser-actions/setup-firefox@v1
+      - name: Install Firefox
+        uses: browser-actions/setup-firefox@v1
       - name: Test with Python unittest on Firefox browser
-      - run: |
+        run: |
           python -m unittest
