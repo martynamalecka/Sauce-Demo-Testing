@@ -17,7 +17,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: isort/isort-action@v1.0.0
 
-  test:
+  test chrome:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -27,6 +27,13 @@ jobs:
           pip install -r requirements.txt
       - name: Install Chrome
         uses: browser-actions/setup-chrome@latest
-      - name: Test with Python unittest
+      - name: Test with Python unittest on Chrome browser
         run: |
           python -m unittest
+
+  test firefox:
+    - runs-on: ubuntu-latest
+    - uses: browser-actions/setup-firefox@v1
+    - name: Test with Python unittest on Firefox browser
+    - run: |
+        python -m unittest
