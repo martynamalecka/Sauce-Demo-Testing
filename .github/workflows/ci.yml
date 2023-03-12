@@ -44,3 +44,17 @@ jobs:
       - name: Test with Python unittest on Firefox browser
         run: |
           python -m unittest
+
+  test-edge:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install test dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Install Edge
+        uses: browser-actions/setup-edge@v1
+      - name: Test with Python unittest on Edge browser
+        run: |
+          python -m unittest
